@@ -8,12 +8,25 @@
 
 
 ## Team Members
+| | | | |
+|:-------------------------------------:|:-------------------------------------:|:-------------------------------------:|:-------------------------------------:|
+|<img width="180" hight="180" alt="person1" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person2" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person3" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person4" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|
+| Name1 | Name2 | Name3 | Name4 |
+| Role | Role | Role | Role |
+|Email1 | Email2 | Email3 | Email4 |
+
+| | | | |
+|:-------------------------------------:|:-------------------------------------:|:-------------------------------------:|:-------------------------------------:|
+|<img width="180" hight="180" alt="person1" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person2" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person3" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person4" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|
+| Name1 | Name2 | Name3 | Name4 |
+| Role | Role | Role | Role |
+|Email1 | Email2 | Email3 | Email4 |
 
 
 ***
 ## Sprint 2025 Deliverables
 ### Presentation (Sprint Reviews)
-***
+
 ### Sprint 0
 
 ***
