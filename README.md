@@ -10,17 +10,17 @@
 ## Team Members
 | | | | |
 |:-------------------------------------:|:-------------------------------------:|:-------------------------------------:|:-------------------------------------:|
-|<img width="180" hight="180" alt="person1" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person2" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person3" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person4" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|
-| Name1 | Name2 | Name3 | Name4 |
-| Role | Role | Role | Role |
-|Email1 | Email2 | Email3 | Email4 |
+|<img width="180" hight="180" alt="Afziya" src="https://github.com/user-attachments/assets/bc8e4865-1518-4a09-8a00-99166a7c71ff">|<img width="180" hight="180" alt="Kaiyin" src="https://github.com/user-attachments/assets/f42b7c93-e7f6-4e6e-ace1-b7b15c8224d2">|<img width="180" hight="180" alt="person3" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="Dinesh" src="https://github.com/user-attachments/assets/e6892c9f-0bf3-453c-af36-ee44835afac6">|
+| Afziya Waknis | Kaiyin Chen | Ritesh Singh | Dinesh Gopi Sunkara​ |
+| Project Manager | Database Administrator​ | DevOps​ | Scrum Master​ |
+| Aw14091n@pace.edu​ | Kaiyin.chen@pace.edu | Ritesh.singh@pace.edu​ | Ds46669n@pace.edu​ |
 
 | | | | |
 |:-------------------------------------:|:-------------------------------------:|:-------------------------------------:|:-------------------------------------:|
-|<img width="180" hight="180" alt="person1" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person2" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person3" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|<img width="180" hight="180" alt="person4" src="https://github.com/user-attachments/assets/1d0b7498-3f16-461e-b0cf-b0d290879851">|
-| Name1 | Name2 | Name3 | Name4 |
-| Role | Role | Role | Role |
-|Email1 | Email2 | Email3 | Email4 |
+|<img width="180" hight="180" alt="Rushabh" src="https://github.com/user-attachments/assets/435146ae-7411-4d73-b4c5-edf2a4584057">|<img width="180" hight="180" alt="person2" src="https://github.com/user-attachments/assets/d733e721-cdb6-4c58-acf9-c680b706fb51">|<img width="180" hight="180" alt="Min" src="https://github.com/user-attachments/assets/c94eeee6-8f70-48be-a07d-8bc10f06e05c">|<img width="180" hight="180" alt="Hrishikesh" src="https://github.com/user-attachments/assets/1fb65afa-2725-4399-b562-ecc90c6057f8">|
+| Rushabh Makwana​ | Vaibhav Thapliyal​ | Min Jung​ | Hrishikesh Shah​ |
+| Backend Developer | Developer Lead​ | Quality Analyst​ | Frontend Developer​ |
+| Rm36294n@pace.edu​ | Vaibhav.thapliyal6@gmail.com​ | Mj34564n@pace.edu​ | Hs75142n@pace.edu​ |
 
 
 ***
