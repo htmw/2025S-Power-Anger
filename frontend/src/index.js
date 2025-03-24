@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+<<<<<<< HEAD
 import { ClerkProvider } from '@clerk/clerk-react'
 import {  RedirectToSignIn, SignIn, SignUp, SignedIn, SignedOut } from "@clerk/clerk-react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
@@ -65,16 +66,22 @@ const ClerkWithRoutes = () => {
     </ClerkProvider>
   );
 }
+=======
+>>>>>>> original/Frontend
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+<<<<<<< HEAD
     {/* <ClerkProvider publishableKey={clerk_key}>
       <App />
     </ClerkProvider> */}
     <BrowserRouter>
       <ClerkWithRoutes />
     </BrowserRouter>
+=======
+    <App />
+>>>>>>> original/Frontend
   </React.StrictMode>
 );
 
