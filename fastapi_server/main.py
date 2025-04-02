@@ -27,7 +27,7 @@ app.add_middleware(
 )
 
 # NodeJS backend URL
-NODEJS_BACKEND_URL = "http://localhost:4000/detections"  # NodeJS backend running on port 4000
+NODEJS_BACKEND_URL = "http://localhost:4000/yolo/detections"  # NodeJS backend running on port 4000
 
 # Initialize YOLO model
 try:
