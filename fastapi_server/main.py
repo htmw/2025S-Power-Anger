@@ -8,6 +8,10 @@ import av
 import cv2
 import time
 from ultralytics import YOLO
+<<<<<<< HEAD
+import numpy as np
+=======
+>>>>>>> original/Frontend
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
