@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Navbar from './Navbar';
 
 function App() {
   const localVideoRef = useRef(null);
@@ -23,7 +24,6 @@ function App() {
       console.log('Starting WebRTC connection...');
       
       // Get user media
-<<<<<<< HEAD
       // const stream = await navigator.mediaDevices.getUserMedia({ 
       //   video: { 
       //     width: { ideal: 640 },
@@ -37,20 +37,6 @@ function App() {
       //   localVideoRef.current.srcObject = stream;
       // }
       //code commented dont want the user media 
-=======
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { 
-          width: { ideal: 640 },
-          height: { ideal: 480 }
-        }
-      });
-      console.log('Got media stream:', stream.getVideoTracks()[0].getSettings());
-
-      // Set local video
-      if (localVideoRef.current) {
-        localVideoRef.current.srcObject = stream;
-      }
->>>>>>> original/Frontend
 
       // Create peer connection
       const pc = new RTCPeerConnection({
@@ -78,18 +64,11 @@ function App() {
       };
 
       // Add local stream to peer connection
-<<<<<<< HEAD
       // stream.getTracks().forEach(track => {
       //   console.log('Adding track to peer connection:', track.kind);
       //   pc.addTrack(track, stream);
       // });
       //dont want local steam
-=======
-      stream.getTracks().forEach(track => {
-        console.log('Adding track to peer connection:', track.kind);
-        pc.addTrack(track, stream);
-      });
->>>>>>> original/Frontend
 
       // Create and send offer
       const offer = await pc.createOffer();
@@ -124,27 +103,11 @@ function App() {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+      <Navbar/>
       <h1>YOLO Detection</h1>
-<<<<<<< HEAD
   
       <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
         <div style={{ flex: 1 }}>
-=======
-      
-      <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
-        <div style={{ flex: 1 }}>
-          <h3>Local Stream</h3>
-          <video
-            ref={localVideoRef}
-            autoPlay
-            playsInline
-            muted
-            style={{ width: '100%', border: '2px solid red' }}
-          />
-        </div>
-        
-        <div style={{ flex: 1 }}>
->>>>>>> original/Frontend
           <h3>Remote Stream (From Server)</h3>
           <video
             ref={remoteVideoRef}
@@ -154,11 +117,7 @@ function App() {
           />
         </div>
       </div>
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> original/Frontend
       <div style={{
         padding: '10px',
         backgroundColor: '#f0f0f0',
@@ -167,11 +126,7 @@ function App() {
       }}>
         Status: {status}
       </div>
-<<<<<<< HEAD
   
-=======
-
->>>>>>> original/Frontend
       {error && (
         <div style={{
           padding: '10px',
@@ -182,11 +137,7 @@ function App() {
           Error: {error}
         </div>
       )}
-<<<<<<< HEAD
   
-=======
-
->>>>>>> original/Frontend
       <button 
         onClick={startWebRTC}
         style={{
@@ -203,13 +154,9 @@ function App() {
       </button>
     </div>
   );
-<<<<<<< HEAD
+  
   
 }
 
 
-=======
-}
-
->>>>>>> original/Frontend
 export default App;
