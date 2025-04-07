@@ -1,17 +1,17 @@
 import speechService from "../services/speechService.js"
 import app from "../app.js";
-//New comment
 
 const speechController = {
-  texttospeech: async (req, res) => {
+  texttospeech: async (body,res) => {
     try {
-      console.log(req.body,Date.now());
-      const result = await speechService.returnspeech(req.body);
+      console.log(body);
+      const result = await speechService.returnspeech(body);
       console.log('result',result);
-      return res.status(200).json({file_name: result});
+      return result;
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({message: "An error occured"})
+      // console.log(error);
+      // return res.status(500).json({message: "An error occured"})
+      return error;
     }
   },
 

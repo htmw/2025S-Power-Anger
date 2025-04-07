@@ -30,6 +30,17 @@ const yoloController = {
           .json({ message: "An error occurred" });
       }
     },
+    detections: async (req,res) => {
+      try {
+        console.log(req.body);
+        const result = await yoloService.detections(JSON.parse('{"imgtext":"'+req.body.imgtext+'"}'));
+        return res.status(200).json({file_name:result});
+      } catch (error){
+        return res
+          .status(500)
+          .json({ message: "An error occurred" });
+      }
+    },
 
 };
 
