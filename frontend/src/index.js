@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { ClerkProvider } from '@clerk/clerk-react'
 import {  RedirectToSignIn, SignIn, SignUp, SignedIn, SignedOut } from "@clerk/clerk-react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import Map from './component/Map';
+
 
 
 const clerk_key=process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
@@ -29,7 +31,10 @@ const ClerkWithRoutes = () => {
           element={
             <>
               <SignedIn>
+              
                 <App />
+                
+                
               </SignedIn>
               <SignedOut>
                 <RedirectToSignIn />
@@ -37,6 +42,7 @@ const ClerkWithRoutes = () => {
             </>
           }
         />
+        <Route path="/maps" element={<Map />} />
 
         {/* Sign-in and Sign-up routes */}
         <Route
@@ -60,9 +66,12 @@ const ClerkWithRoutes = () => {
             />
           }
         />
-       
+      
       </Routes>
+      
     </ClerkProvider>
+    
+
   );
 }
 
