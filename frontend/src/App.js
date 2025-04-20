@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Navbar from './Navbar';
 
 function App() {
   const localVideoRef = useRef(null);
@@ -23,6 +24,21 @@ function App() {
       console.log('Starting WebRTC connection...');
       
       // Get user media
+
+      // const stream = await navigator.mediaDevices.getUserMedia({ 
+      //   video: { 
+      //     width: { ideal: 640 },
+      //     height: { ideal: 480 }
+      //   }
+      // });
+      // console.log('Got media stream:', stream.getVideoTracks()[0].getSettings());
+
+      // // Set local video
+      // if (localVideoRef.current) {
+      //   localVideoRef.current.srcObject = stream;
+      // }
+      //code commented dont want the user media 
+
       const stream = await navigator.mediaDevices.getUserMedia({ 
         video: { 
           width: { ideal: 640 },
@@ -35,6 +51,7 @@ function App() {
       if (localVideoRef.current) {
         localVideoRef.current.srcObject = stream;
       }
+
 
       // Create peer connection
       const pc = new RTCPeerConnection({
@@ -62,10 +79,18 @@ function App() {
       };
 
       // Add local stream to peer connection
+
+      // stream.getTracks().forEach(track => {
+      //   console.log('Adding track to peer connection:', track.kind);
+      //   pc.addTrack(track, stream);
+      // });
+      //dont want local steam
+
       stream.getTracks().forEach(track => {
         console.log('Adding track to peer connection:', track.kind);
         pc.addTrack(track, stream);
       });
+
 
       // Create and send offer
       const offer = await pc.createOffer();
@@ -100,7 +125,13 @@ function App() {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+      <Navbar/>
       <h1>YOLO Detection</h1>
+
+  
+      <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
+        <div style={{ flex: 1 }}>
+
       
       <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
         <div style={{ flex: 1 }}>
@@ -124,6 +155,7 @@ function App() {
           />
         </div>
       </div>
+
       <div style={{
         padding: '10px',
         backgroundColor: '#f0f0f0',
@@ -132,6 +164,7 @@ function App() {
       }}>
         Status: {status}
       </div>
+
       {error && (
         <div style={{
           padding: '10px',
@@ -142,6 +175,7 @@ function App() {
           Error: {error}
         </div>
       )}
+
       <button 
         onClick={startWebRTC}
         style={{
@@ -158,6 +192,14 @@ function App() {
       </button>
     </div>
   );
+
+  
+  
 }
+
+
+
+}
+
 
 export default App;
