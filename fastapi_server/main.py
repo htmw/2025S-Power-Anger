@@ -7,11 +7,9 @@ import logging
 import av
 import cv2
 import time
-from ultralytics import YOLO
-<<<<<<< HEAD
+import aiohttp
 import numpy as np
-=======
->>>>>>> original/Frontend
+from ultralytics import YOLO
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -27,6 +25,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# NodeJS backend URL
+NODEJS_BACKEND_URL = "http://localhost:4000/yolo/detections"  # NodeJS backend running on port 4000
 
 # Initialize YOLO model
 try:
@@ -46,17 +47,57 @@ except Exception as e:
 # Store active peer connections
 pcs = set()
 
+# HTTP session for sending data to NodeJS backend
+http_session = None
+
+@app.on_event("startup")
+async def startup_event():
+    global http_session
+    http_session = aiohttp.ClientSession()
+    logger.info("HTTP session created for NodeJS communication")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    # Close HTTP session
+    global http_session
+    if http_session:
+        await http_session.close()
+        logger.info("HTTP session closed")
+    
+    # Close all peer connections
+    logger.info("Shutting down server and cleaning up connections")
+    coros = [pc.close() for pc in pcs]
+    await asyncio.gather(*coros)
+    pcs.clear()
+
+async def send_to_nodejs(detection_data):
+    """Send detection data to NodeJS backend"""
+    global http_session
+    if not http_session:
+        logger.error("HTTP session not initialized")
+        return
+    
+    try:
+        async with http_session.post(NODEJS_BACKEND_URL, json=detection_data) as response:
+            if response.status != 200:
+                logger.warning(f"Failed to send data to NodeJS backend: {response.status}")
+            else:
+                logger.debug(f"Detection data sent to NodeJS backend: {len(detection_data['detections'])} objects")
+    except Exception as e:
+        logger.error(f"Error sending data to NodeJS backend: {e}")
+
 class VideoTransformTrack(MediaStreamTrack):
     kind = "video"
     
-    def __init__(self, track):
+    def __init__(self, track, pc_id):
         super().__init__()
         self.track = track
         self.frame_count = 0
         self.skip_count = 0
         self.last_process_time = time.time()
         self.process_every_n_frames = 3  # Process every 3rd frame
-        logger.info("VideoTransformTrack initialized with frame skipping")
+        self.pc_id = pc_id  # Store peer connection ID for identification
+        logger.info(f"VideoTransformTrack initialized with frame skipping for pc_id: {pc_id}")
 
     async def recv(self):
         try:
@@ -81,6 +122,14 @@ class VideoTransformTrack(MediaStreamTrack):
             # Run YOLO detection (with lowered resolution for speed)
             results = model(img, verbose=False)
             
+            # Prepare detection data for NodeJS
+            detection_data = {
+                "timestamp": time.time(),
+                "frame_id": self.frame_count,
+                "pc_id": self.pc_id,
+                "detections": []
+            }
+            
             # Process results and draw on frame
             for result in results:
                 boxes = result.boxes
@@ -91,6 +140,21 @@ class VideoTransformTrack(MediaStreamTrack):
                     confidence = float(box.conf)
                     class_id = int(box.cls)
                     class_name = model.names[class_id]
+                    
+                    # Add to detection data for NodeJS
+                    detection_data["detections"].append({
+                        "class_id": class_id,
+                        "class_name": class_name,
+                        "confidence": confidence,
+                        "bbox": {
+                            "x1": x1,
+                            "y1": y1,
+                            "x2": x2,
+                            "y2": y2,
+                            "width": x2 - x1,
+                            "height": y2 - y1
+                        }
+                    })
                     
                     # Draw box
                     cv2.rectangle(
@@ -123,6 +187,11 @@ class VideoTransformTrack(MediaStreamTrack):
             if self.frame_count % 30 == 0:
                 logger.info(f"Processing speed: {elapsed*1000:.1f}ms per frame")
             
+            # Send detection data to NodeJS backend if there are detections
+            if detection_data["detections"]:
+                # Use create_task to not block the video processing
+                asyncio.create_task(send_to_nodejs(detection_data))
+            
             # Convert back to VideoFrame
             new_frame = av.VideoFrame.from_ndarray(img, format="bgr24")
             new_frame.pts = frame.pts
@@ -142,20 +211,25 @@ async def handle_offer(session_description: dict):
         
         # Create new RTCPeerConnection
         pc = RTCPeerConnection()
+        # Generate a unique ID for this peer connection
+        pc_id = f"pc_{id(pc)}"
+        pc.pc_id = pc_id  # Store ID on the object for reference
         pcs.add(pc)
+        
+        logger.info(f"Created new peer connection with ID: {pc_id}")
 
         @pc.on("connectionstatechange")
         async def on_connectionstatechange():
-            logger.info(f"Connection state changed to: {pc.connectionState}")
+            logger.info(f"Connection state changed to: {pc.connectionState} for pc_id: {pc_id}")
             if pc.connectionState == "failed" or pc.connectionState == "closed":
                 pcs.discard(pc)
 
         @pc.on("track")
         def on_track(track):
-            logger.info(f"Received {track.kind} track")
+            logger.info(f"Received {track.kind} track for pc_id: {pc_id}")
             if track.kind == "video":
                 # Create video processor track
-                video_processor = VideoTransformTrack(track)
+                video_processor = VideoTransformTrack(track, pc_id)
                 pc.addTrack(video_processor)
 
         # Set remote description
@@ -171,7 +245,7 @@ async def handle_offer(session_description: dict):
         await pc.setLocalDescription(answer)
 
         response = {"sdp": pc.localDescription.sdp, "type": pc.localDescription.type}
-        logger.info("Sending answer back to client")
+        logger.info(f"Sending answer back to client for pc_id: {pc_id}")
         return response
 
     except Exception as e:
@@ -180,14 +254,6 @@ async def handle_offer(session_description: dict):
             await pc.close()
             pcs.discard(pc)
         raise HTTPException(status_code=500, detail=str(e))
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    # Close all peer connections
-    logger.info("Shutting down server and cleaning up connections")
-    coros = [pc.close() for pc in pcs]
-    await asyncio.gather(*coros)
-    pcs.clear()
 
 if __name__ == "__main__":
     import uvicorn
