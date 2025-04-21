@@ -88,7 +88,7 @@ root.render(
       <ClerkWithRoutes />
     </BrowserRouter>
 
-    <App />
+    {/* <App /> */}
 
   </React.StrictMode>
 );

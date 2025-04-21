@@ -5,7 +5,7 @@ import app from "./app.js";
 dotenv.config();
 // db();
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8002;
 
 app.listen(PORT, () => {
     console.log(`User Service is running on port ${PORT}`);
