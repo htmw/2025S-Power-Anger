@@ -32,7 +32,7 @@ NODEJS_BACKEND_URL = "http://localhost:8001/yolo/detections"  # NodeJS backend r
 # Initialize YOLO model
 try:
     # Use the smallest and fastest model for better performance
-    model = YOLO("yolov8n.pt")
+    model = YOLO("yolo11n.pt")
     # Set inference size to smaller value for faster processing
     model.overrides['imgsz'] = 320
     # Set confidence threshold higher to reduce processing
