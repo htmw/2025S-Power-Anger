@@ -133,73 +133,69 @@ function App() {
         <div style={{ flex: 1 }}>
 
       
-      <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
-        <div style={{ flex: 1 }}>
-          <h3>Local Stream</h3>
-          <video
-            ref={localVideoRef}
-            autoPlay
-            playsInline
-            muted
-            style={{ width: '100%', border: '2px solid red' }}
-          />
-        </div>
-        
-        <div style={{ flex: 1 }}>
-          <h3>Remote Stream (From Server)</h3>
-          <video
-            ref={remoteVideoRef}
-            autoPlay
-            playsInline
-            style={{ width: '100%', border: '2px solid blue' }}
-          />
+          <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
+            <div style={{ flex: 1 }}>
+              <h3>Local Stream</h3>
+              <video
+                ref={localVideoRef}
+                autoPlay
+                playsInline
+                muted
+                style={{ width: '100%', border: '2px solid red' }}
+              />
+            </div>
+          
+            <div style={{ flex: 1 }}>
+              <h3>Remote Stream (From Server)</h3>
+              <video
+                ref={remoteVideoRef}
+                autoPlay
+                playsInline
+                style={{ width: '100%', border: '2px solid blue' }}
+              />
+            </div>
+          </div>
+
+          <div style={{
+            padding: '10px',
+            backgroundColor: '#f0f0f0',
+            borderRadius: '4px',
+            marginBottom: '10px'
+          }}>
+            Status: {status}
+          </div>
+
+          {error && (
+            <div style={{
+              padding: '10px',
+              backgroundColor: '#ffebee',
+              color: '#c62828',
+              borderRadius: '4px'
+            }}>
+              Error: {error}
+            </div>
+          )}
+
+          <button 
+            onClick={startWebRTC}
+            style={{
+              marginTop: '10px',
+              padding: '10px 20px',
+              backgroundColor: '#2196F3',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Restart Connection
+          </button>
         </div>
       </div>
-
-      <div style={{
-        padding: '10px',
-        backgroundColor: '#f0f0f0',
-        borderRadius: '4px',
-        marginBottom: '10px'
-      }}>
-        Status: {status}
-      </div>
-
-      {error && (
-        <div style={{
-          padding: '10px',
-          backgroundColor: '#ffebee',
-          color: '#c62828',
-          borderRadius: '4px'
-        }}>
-          Error: {error}
-        </div>
-      )}
-
-      <button 
-        onClick={startWebRTC}
-        style={{
-          marginTop: '10px',
-          padding: '10px 20px',
-          backgroundColor: '#2196F3',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer'
-        }}
-      >
-        Restart Connection
-      </button>
     </div>
-  );
-
-  
-  
+  ); 
 }
 
-
-
-}
 
 
 export default App;

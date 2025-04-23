@@ -27,12 +27,12 @@ app.add_middleware(
 )
 
 # NodeJS backend URL
-NODEJS_BACKEND_URL = "http://localhost:4000/yolo/detections"  # NodeJS backend running on port 4000
+NODEJS_BACKEND_URL = "http://localhost:8001/yolo/detections"  # NodeJS backend running on port 4000
 
 # Initialize YOLO model
 try:
     # Use the smallest and fastest model for better performance
-    model = YOLO("yolov8n.pt")
+    model = YOLO("yolo11n.pt")
     # Set inference size to smaller value for faster processing
     model.overrides['imgsz'] = 320
     # Set confidence threshold higher to reduce processing
