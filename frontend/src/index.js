@@ -8,11 +8,10 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import {  RedirectToSignIn, SignIn, SignUp, SignedIn, SignedOut } from "@clerk/clerk-react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Map from './component/Map';
-
-
+import { LoadScript } from "@react-google-maps/api";
 
 const clerk_key=process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
-
+const MAPS_API = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 console.log(clerk_key);
 if(!clerk_key){
   throw new Error("Key WAS NOT FOUND");
@@ -43,7 +42,7 @@ const ClerkWithRoutes = () => {
             </>
           }
         />
-        <Route path="/maps" element={<Map />} />
+        <Route path="/maps" element={<LoadScript googleMapsApiKey={MAPS_API} libraries={["places"]}><Map /></LoadScript>} />
 
         {/* Sign-in and Sign-up routes */}
         <Route
