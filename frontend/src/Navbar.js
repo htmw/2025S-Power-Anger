@@ -14,11 +14,11 @@ const Navbar = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="navbar-links">
+        {/* <div className="navbar-links">
           <a href="#maps" className="navbar-link">Maps</a>
           <a href="#text" className="navbar-link">Text to speech</a>
           <a href="#paths" className="navbar-link">Old paths </a>
-        </div>
+        </div> */}
       </div>
     </nav>
   );
