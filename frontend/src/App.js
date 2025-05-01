@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Navbar from './Navbar';
+import { useClerk } from '@clerk/clerk-react';
 
 function App() {
   const localVideoRef = useRef(null);
@@ -7,6 +8,7 @@ function App() {
   const peerRef = useRef(null);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('disconnected');
+  const { signOut } = useClerk();
 
   useEffect(() => {
     startWebRTC();
@@ -189,6 +191,20 @@ function App() {
             }}
           >
             Restart Connection
+          </button>
+          <button 
+            onClick={() => signOut()}
+            style={{
+              marginLeft: '10px',
+              padding: '10px 20px',
+              backgroundColor: '#f44336',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Sign Out
           </button>
         </div>
       </div>
