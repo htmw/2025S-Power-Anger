@@ -10,7 +10,7 @@ import { spawn } from "child_process";
 import crypto from 'crypto';
 
 
-
+dotenv.config();
 const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" }));
